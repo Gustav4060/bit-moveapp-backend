@@ -98,11 +98,11 @@ public class MovimientoCuentasServicioImpl implements IMovimientoCuentasServicio
 	}
 
 	private boolean validarLimiteDiarioRetiro(List<Movimiento> movimientos, BigDecimal valorRetiro) {
-		BigDecimal valotMovimientosDeHoy = movimientos.stream()
+		BigDecimal valorMovimientosDeHoy = movimientos.stream()
 				.filter(m -> m.getFecha().toLocalDate().equals(LocalDate.now())
 						&& m.getTipoMovimiento().equals(TipoMovimientoEnum.R))
 				.map(val -> val.getValor().multiply(BigDecimal.valueOf(-1.0))).reduce(BigDecimal.ZERO, BigDecimal::add);
-		return valotMovimientosDeHoy.add(valorRetiro).compareTo(LIMITE_DIARIO_RETIRO) > 0;
+		return valorMovimientosDeHoy.add(valorRetiro).compareTo(LIMITE_DIARIO_RETIRO) > 0;
 
 	}
 
